@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using RealEstateWeb.Data;
 
 namespace RealEstateWeb.Pages.Properties
 {
+    [Authorize(Policy = "RequireOwnerProfile")]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

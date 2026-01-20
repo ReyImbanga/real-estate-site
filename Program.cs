@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RealEstateWeb.Data;
+using RealEstateWeb.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,18 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+//un nouveau builder pour la validation
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireOwnerProfile", policy =>
+        policy.Requirements.Add(new OwnerProfileRequirement()));
+});
+
+builder.Services.AddScoped<IAuthorizationHandler, OwnerProfileHandler>();
+builder.Services.AddScoped<IClaimsTransformation, OwnerClaimsTransformation>();
+
+//====================================
 
 var app = builder.Build();
 

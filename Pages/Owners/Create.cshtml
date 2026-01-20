@@ -1,0 +1,23 @@
+﻿@page
+@model RealEstateWeb.Pages.Owners.CreateModel
+@{
+}
+
+
+<h2>Devenir propriétaire</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Prénom</label>
+        <input asp-for="OwnerProfile.FirstName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Nom</label>
+        <input asp-for="OwnerProfile.LastName" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Créer mon profil propriétaire
+    </button>
+</form>

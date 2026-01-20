@@ -36,16 +36,20 @@ else
                            class="btn btn-sm btn-primary">
                             Détails
                         </a>
+                        @if (User.Identity?.IsAuthenticated == true && User.HasClaim("OwnerProfile", "true"))
+                        {
 
-                        <a asp-page="Edit" asp-route-id="@property.Id"
-                           class="btn btn-sm btn-warning">
-                            Modifier
-                        </a>
-                        <a asp-page="Delete" asp-route-id="@property.Id"
-                           class="btn btn-sm btn-danger">
-                            Supprimer
-                        </a>
 
+                            <a asp-page="Edit" asp-route-id="@property.Id"
+                               class="btn btn-sm btn-warning">
+                                Modifier
+                            </a>
+
+                            <a asp-page="Delete" asp-route-id="@property.Id"
+                               class="btn btn-sm btn-danger">
+                                Supprimer
+                            </a>
+                        }
                     </td>
                 </tr>
             }
