@@ -1,0 +1,95 @@
+﻿@page
+@model RealEstateWeb.Pages.Properties.CreateModel
+@{
+}
+
+<h2>Créer une propriété + annonce</h2>
+
+<form method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <h4>Propriété</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Adresse</label>
+        <input asp-for="Input.AddressLine" class="form-control" />
+        <span asp-validation-for="Input.AddressLine" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ville</label>
+        <input asp-for="Input.City" class="form-control" />
+        <span asp-validation-for="Input.City" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Région</label>
+        <input asp-for="Input.Region" class="form-control" />
+        <span asp-validation-for="Input.Region" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Type de bien</label>
+        <select asp-for="Input.PropertyTypeId" asp-items="Model.PropertyTypes" class="form-select">
+            <option value="">-- Sélectionner --</option>
+        </select>
+        <span asp-validation-for="Input.PropertyTypeId" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <label class="form-label">Surface (m²)</label>
+            <input asp-for="Input.PropertySize" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label class="form-label">Chambres</label>
+            <input asp-for="Input.NumBedrooms" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label class="form-label">Salles de bain</label>
+            <input asp-for="Input.NumBathrooms" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label class="form-label">Parking</label>
+            <input asp-for="Input.NumCarspaces" class="form-control" />
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Input.Description" class="form-control" rows="4"></textarea>
+    </div>
+
+    <hr />
+
+    <h4>Annonce</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Type d’annonce</label>
+        <select asp-for="Input.ListingTypeId" asp-items="Model.ListingTypes" class="form-select">
+            <option value="">-- Sélectionner --</option>
+        </select>
+        <span asp-validation-for="Input.ListingTypeId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Statut</label>
+        <select asp-for="Input.ListingStatusId" asp-items="Model.ListingStatuses" class="form-select">
+            <option value="">-- Sélectionner --</option>
+        </select>
+        <span asp-validation-for="Input.ListingStatusId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label">Prix</label>
+        <input asp-for="Input.Price" class="form-control" />
+        <span asp-validation-for="Input.Price" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Créer</button>
+    <a asp-page="Index" class="btn btn-outline-secondary">Annuler</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

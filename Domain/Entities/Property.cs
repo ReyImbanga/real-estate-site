@@ -18,8 +18,8 @@ namespace RealEstateWeb.Domain.Entities
 
         // FK → PropertyType
         [Required]
-        public int PropertyTypeId { get; set; }
-        public PropertyType PropertyType { get; set; } = null!;
+        public int? PropertyTypeId { get; set; }
+        public PropertyType? PropertyType { get; set; }
 
         public int? PropertySize { get; set; }
 
