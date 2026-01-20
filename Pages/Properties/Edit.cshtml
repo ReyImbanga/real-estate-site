@@ -1,4 +1,73 @@
-﻿@page
+﻿@page "{id:int}"
 @model RealEstateWeb.Pages.Properties.EditModel
 @{
+}
+
+<h2>Modifier la propriété</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Input.PropertyId" />
+    <input type="hidden" asp-for="Input.ListingId" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <h4>Propriété</h4>
+
+    <label class="form-label">Adresse</label>
+    <input asp-for="Input.AddressLine" class="form-control mb-2" />
+    <label class="form-label">Ville</label>
+    <input asp-for="Input.City" class="form-control mb-2" />
+    <label class="form-label">Région</label>
+    <input asp-for="Input.Region" class="form-control mb-2" />
+
+    <label class="form-label">Type de bien</label>
+
+    <select asp-for="Input.PropertyTypeId"
+            asp-items="Model.PropertyTypes"
+            class="form-select mb-2"></select>
+
+    <label class="form-label">Surface (m²)</label>
+
+    <input asp-for="Input.PropertySize" class="form-control mb-2" />
+    <label class="form-label">Chambres</label>
+
+    <input asp-for="Input.NumBedrooms" class="form-control mb-2" />
+    <label class="form-label">Salles de bain</label>
+
+    <input asp-for="Input.NumBathrooms" class="form-control mb-2" />
+    <label class="form-label">Parking</label>
+
+    <input asp-for="Input.NumCarspaces" class="form-control mb-2" />
+
+    <label class="form-label">Description</label>
+
+    <textarea asp-for="Input.Description"
+              class="form-control mb-3"></textarea>
+
+    <hr />
+
+    <h4>Annonce</h4>
+    <label class="form-label">Type d’annonce</label>
+
+    <select asp-for="Input.ListingTypeId"
+            asp-items="Model.ListingTypes"
+            class="form-select mb-2"></select>
+
+    <label class="form-label">Statut</label>
+
+    <select asp-for="Input.ListingStatusId"
+            asp-items="Model.ListingStatuses"
+            class="form-select mb-2"></select>
+
+    <label class="form-label">Prix</label>
+
+    <input asp-for="Input.Price" class="form-control mb-3" />
+
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a asp-page="Details" asp-route-id="@Model.Input.PropertyId"
+       class="btn btn-secondary">Annuler</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
