@@ -1,5 +1,51 @@
-﻿@page
+﻿@page "{id:int}"
 @model RealEstateWeb.Pages.Properties.DetailsModel
 @{
 }
 
+<h2>Détails de la propriété</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Property.AddressLine</h5>
+        <p class="card-text">
+            <strong>Ville :</strong> @Model.Property.City <br />
+            <strong>Région :</strong> @Model.Property.Region <br />
+            <strong>Type :</strong> @Model.Property.PropertyType.Description <br />
+            <strong>Surface :</strong> @Model.Property.PropertySize m²
+        </p>
+    </div>
+</div>
+
+<h4>Annonces</h4>
+
+@if (!Model.Property.Listings.Any())
+{
+    <p>Aucune annonce pour ce bien.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Prix</th>
+                <th>Statut</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var listing in Model.Property.Listings)
+            {
+                <tr>
+                    <td>@listing.ListingType.Description</td>
+                    <td>@listing.Price</td>
+                    <td>@listing.ListingStatus.Description</td>
+                    <td>@listing.CreatedDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-page="Index" class="btn btn-secondary">Retour</a>

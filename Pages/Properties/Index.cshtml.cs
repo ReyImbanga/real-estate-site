@@ -22,6 +22,8 @@ namespace RealEstateWeb.Pages.Properties
         {
             Properties = await _context.Properties
                 .Include(p => p.PropertyType)
+                .Include(p => p.Listings)
+                .AsNoTracking()
                 .ToListAsync();
         }
     }

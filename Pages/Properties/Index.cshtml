@@ -7,27 +7,43 @@
 
 <a asp-page="Create" class="btn btn-success mb-2">Nouvelle propriété</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Adresse</th>
-            <th>Ville</th>
-            <th>Type</th>            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model.Properties)
-        {
+@if (!Model.Properties.Any())
+{
+    <p>Aucune propriété enregistrée.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@p.AddressLine</td>
-                <td>@p.City</td>
-                <td>@p.PropertyType.Description</td>
-                <td>
-                    <a asp-page="Details" asp-route-id="@p.Id">Détails</a>
-                </td>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Type</th>
+                <th>Annonces</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var property in Model.Properties)
+            {
+                <tr>
+                    <td>@property.AddressLine</td>
+                    <td>@property.City</td>
+                    <td>@property.PropertyType.Description</td>
+                    <td>@property.Listings.Count</td>
+                    <td>
+                        <a asp-page="Details" asp-route-id="@property.Id"
+                           class="btn btn-sm btn-primary">
+                            Détails
+                        </a>
 
-
-</table>
+                        <a asp-page="Edit" asp-route-id="@property.Id"
+                           class="btn btn-sm btn-warning">
+                            Modifier
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
