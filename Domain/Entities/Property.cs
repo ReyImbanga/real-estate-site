@@ -31,6 +31,8 @@ namespace RealEstateWeb.Domain.Entities
 
         [MaxLength(2000)]
         public string? Description { get; set; }
+        public DateTime? DeletedAt { get; set; }
+
 
         /* =======================
            NAVIGATIONS (préparées)

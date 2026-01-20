@@ -1,4 +1,29 @@
-﻿@page
+﻿@page "{id:int}"
 @model RealEstateWeb.Pages.Properties.DeleteModel
 @{
 }
+
+<h2>Supprimer la propriété</h2>
+
+<div class="alert alert-warning">
+    <strong>Attention :</strong> cette action désactivera la propriété et toutes ses annonces.
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>@Model.Property.AddressLine</h5>
+        <p>
+            @Model.Property.City — @Model.Property.PropertyType.Description
+        </p>
+    </div>
+</div>
+
+<form method="post">
+    <button type="submit" class="btn btn-danger">
+        Confirmer la suppression
+    </button>
+    <a asp-page="Details" asp-route-id="@Model.Property.Id"
+       class="btn btn-secondary">
+        Annuler
+    </a>
+</form>

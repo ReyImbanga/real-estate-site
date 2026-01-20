@@ -21,10 +21,12 @@ namespace RealEstateWeb.Pages.Properties
         public async Task OnGetAsync()
         {
             Properties = await _context.Properties
+                .Where(p => p.DeletedAt == null)
                 .Include(p => p.PropertyType)
-                .Include(p => p.Listings)
+                .Include(p => p.Listings.Where(l => l.DeletedAt == null))
                 .AsNoTracking()
                 .ToListAsync();
+
         }
     }
 }
