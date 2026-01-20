@@ -1,0 +1,30 @@
+﻿@page
+@model RealEstateWeb.Pages.Properties.UploadImagesModel
+@{
+}
+
+
+<h2>Ajouter des images</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Input.PropertyId" />
+
+    <div class="mb-3">
+        <label class="form-label">Images</label>
+        <input asp-for="Input.Files"
+               type="file"
+               class="form-control"
+               multiple
+               accept="image/*" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Uploader
+    </button>
+
+    <a asp-page="Details"
+       asp-route-id="@Model.Input.PropertyId"
+       class="btn btn-secondary">
+        Annuler
+    </a>
+</form>

@@ -5,6 +5,16 @@
 
 <h2>Détails de la propriété</h2>
 
+@if (User.HasClaim("OwnerProfile", "true"))
+{
+    <a asp-page="UploadImages"
+       asp-route-propertyId="@Model.Property.Id"
+       class="btn btn-outline-primary mb-3">
+        Ajouter des images
+    </a>
+}
+
+
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title">@Model.Property.AddressLine</h5>
@@ -47,5 +57,25 @@ else
         </tbody>
     </table>
 }
+
+<h4>Galerie</h4>
+
+@if (Model.Property.Medias.Any())
+{
+    <div class="row">
+        @foreach (var media in Model.Property.Medias)
+        {
+            <div class="col-md-3 mb-3">
+                <img src="@media.MediaPath"
+                     class="img-fluid rounded" />
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Aucune image.</p>
+}
+
 
 <a asp-page="Index" class="btn btn-secondary">Retour</a>
