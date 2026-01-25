@@ -58,6 +58,32 @@ else
     </table>
 }
 
+<h4>Historique des prix</h4>
+
+@foreach (var listing in Model.Property.Listings)
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Prix</th>
+                <th>Début</th>
+                <th>Fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var h in listing.PriceHistories.OrderByDescending(p => p.StartDate))
+            {
+                <tr>
+                    <td>@h.Price</td>
+                    <td>@h.StartDate</td>
+                    <td>@(h.EndDate?.ToString() ?? "Actuel")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
 <h4>Galerie</h4>
 
 @if (Model.Property.Medias.Any())

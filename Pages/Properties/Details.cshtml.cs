@@ -26,7 +26,11 @@ namespace RealEstateWeb.Pages.Properties
                 .Include(p => p.Listings)
                     .ThenInclude(l => l.ListingStatus)
                     .Include(p => p.Medias)
+                    .Include(p => p.Listings)
+    .ThenInclude(l => l.PriceHistories)
+
                 .FirstOrDefaultAsync(p => p.Id == id);
+
 
             if (Property == null)
             {

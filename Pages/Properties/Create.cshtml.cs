@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using RealEstateWeb.Data;
 using RealEstateWeb.Domain.Entities;
 using RealEstateWeb.Models.ViewModels;
+using RealEstateWeb.Services;
 
 namespace RealEstateWeb.Pages.Properties
 {
@@ -13,10 +14,12 @@ namespace RealEstateWeb.Pages.Properties
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly ListingPriceService _priceService;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context, ListingPriceService priceService)
         {
             _context = context;
+            _priceService = priceService;
         }
 
         [BindProperty]
@@ -71,6 +74,9 @@ namespace RealEstateWeb.Pages.Properties
 
                 _context.Listings.Add(listing);
                 await _context.SaveChangesAsync();
+
+                // Historique initial
+                await _priceService.CreateInitialPriceAsync(listing);
 
                 await tx.CommitAsync();
 

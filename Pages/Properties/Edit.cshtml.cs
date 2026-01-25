@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using RealEstateWeb.Data;
 using RealEstateWeb.Domain.Entities;
 using RealEstateWeb.Models.ViewModels;
+using RealEstateWeb.Services;
 
 namespace RealEstateWeb.Pages.Properties
 {
@@ -13,10 +14,12 @@ namespace RealEstateWeb.Pages.Properties
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly ListingPriceService _priceService;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, ListingPriceService priceService)
         {
             _context = context;
+            _priceService = priceService;
         }
 
         [BindProperty]
@@ -96,7 +99,9 @@ namespace RealEstateWeb.Pages.Properties
             // Mise ? jour Listing
             listing.ListingTypeId = Input.ListingTypeId;
             listing.ListingStatusId = Input.ListingStatusId;
-            listing.Price = Input.Price;
+            //listing.Price = Input.Price;
+            await _priceService.UpdatePriceIfChangedAsync(listing, Input.Price);
+
 
             await _context.SaveChangesAsync();
 

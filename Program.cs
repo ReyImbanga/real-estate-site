@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RealEstateWeb.Data;
 using RealEstateWeb.Security;
+using RealEstateWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddScoped<IAuthorizationHandler, OwnerProfileHandler>();
 builder.Services.AddScoped<IClaimsTransformation, OwnerClaimsTransformation>();
+builder.Services.AddScoped<ListingPriceService>();
+
 
 //====================================
 
