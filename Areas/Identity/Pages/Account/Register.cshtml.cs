@@ -2,14 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,8 +9,18 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RealEstateWeb.Data;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RealEstateWeb.Areas.Identity.Pages.Account
 {
@@ -30,12 +32,15 @@ namespace RealEstateWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context; //nouvelle injection
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
+            ApplicationDbContext context,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -43,6 +48,7 @@ namespace RealEstateWeb.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
             _emailSender = emailSender;
         }
 
@@ -71,6 +77,18 @@ namespace RealEstateWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            /*[Required]
+            [Display(Name = "First name")]
+            public string FirstName { get; set; } = null!;
+
+            [Required]
+            [Display(Name = "Last name")]
+            public string LastName { get; set; } = null!;
+
+            [Phone]
+            [Display(Name = "Phone number")]
+            public string? PhoneNumber { get; set; }*/
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -121,6 +139,23 @@ namespace RealEstateWeb.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    //Client par défaut
+                    var clientProfile = new ClientProfile
+                    {
+                        ApplicationUserId = user.Id,
+                        /*FirstName = null,
+                        LastName = null,
+                        DateOfBirth = null*/
+                        //EmailAddress = user.Email!,
+                        //PhoneNumber = Input.PhoneNumber
+                    };
+
+                    _context.ClientProfiles.Add(clientProfile);
+                    await _context.SaveChangesAsync();
+
+                    await _userManager.AddClaimAsync(user, new Claim("HasClientProfile", "true"));
+
+                    //Client par défaut------
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

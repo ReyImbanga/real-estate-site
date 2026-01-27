@@ -1,0 +1,83 @@
+﻿@page
+@model RealEstateWeb.Pages.Properties.SearchModel
+@{
+}
+
+<h2>Recherche de biens</h2>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <input asp-for="Input.City"
+               class="form-control"
+               placeholder="Ville" />
+    </div>
+
+    <div class="col-md-3">
+        <select asp-for="Input.PropertyTypeId"
+                asp-items="Model.PropertyTypes"
+                class="form-select">
+            <option value="">Type de bien</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <select asp-for="Input.ListingTypeId"
+                asp-items="Model.ListingTypes"
+                class="form-select">
+            <option value="">Type d’annonce</option>
+        </select>
+    </div>
+
+    <div class="col-md-1">
+        <input asp-for="Input.MinPrice"
+               class="form-control"
+               placeholder="Min" />
+    </div>
+
+    <div class="col-md-1">
+        <input asp-for="Input.MaxPrice"
+               class="form-control"
+               placeholder="Max" />
+    </div>
+
+    <div class="col-md-1">
+        <button class="btn btn-primary w-100">
+            Rechercher
+        </button>
+    </div>
+</form>
+
+@if (!Model.Input.Results.Any())
+{
+    <p>Aucun résultat.</p>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Type</th>
+                <th>Annonce</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Input.Results)
+            {
+                <tr>
+                    <td>
+                        <a asp-page="Details" asp-route-id="@r.PropertyId">
+                            @r.AddressLine
+                        </a>
+                    </td>
+                    <td>@r.City</td>
+                    <td>@r.PropertyType</td>
+                    <td>@r.ListingType</td>
+                    <td>@r.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

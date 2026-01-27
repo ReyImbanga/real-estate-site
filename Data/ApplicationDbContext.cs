@@ -33,8 +33,8 @@ namespace RealEstateWeb.Data
             // ClientProfile: 1–1 + contraintes uniques
             builder.Entity<ClientProfile>(e =>
             {
-                e.HasIndex(x => x.EmailAddress).IsUnique();
-                e.HasIndex(x => x.PhoneNumber).IsUnique();
+                /*e.HasIndex(x => x.EmailAddress).IsUnique();
+                e.HasIndex(x => x.PhoneNumber).IsUnique();*/
                 e.HasIndex(x => x.ApplicationUserId).IsUnique();
 
                 e.HasOne(x => x.ApplicationUser)

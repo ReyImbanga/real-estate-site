@@ -1,0 +1,28 @@
+﻿@page
+@model RealEstateWeb.Pages.Dashboard.ProfileModel
+@{
+}
+
+<h2>Mon profil</h2>
+
+<form method="post" class="mt-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="ReturnUrl" />
+
+    <div class="mb-3">
+        <label>Prénom</label>
+        <input asp-for="Input.FirstName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Nom</label>
+        <input asp-for="Input.LastName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Date de naissance</label>
+        <input asp-for="Input.DateOfBirth" type="date" class="form-control" />
+    </div>
+
+    <button class="btn btn-primary">Enregistrer</button>
+</form>

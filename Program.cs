@@ -21,10 +21,14 @@ builder.Services.AddRazorPages();
 //un nouveau builder pour la validation
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("RequireClientProfile", policy =>
+        policy.Requirements.Add(new ClientProfileRequirement()));
+
     options.AddPolicy("RequireOwnerProfile", policy =>
         policy.Requirements.Add(new OwnerProfileRequirement()));
 });
 
+builder.Services.AddScoped<IAuthorizationHandler, ClientProfileHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, OwnerProfileHandler>();
 builder.Services.AddScoped<IClaimsTransformation, OwnerClaimsTransformation>();
 builder.Services.AddScoped<ListingPriceService>();

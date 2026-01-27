@@ -1,0 +1,43 @@
+﻿@page
+@model RealEstateWeb.Pages.Dashboard.IndexModel
+@{
+}
+
+
+<h2>Dashboard</h2>
+
+@if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+{
+    <div class="alert alert-success">
+        @Model.StatusMessage
+    </div>
+}
+
+<div class="mb-3">
+    @if (Model.IsProfileCompleted)
+    {
+        <span class="badge bg-success">Profil complété</span>
+    }
+    else
+    {
+        <span class="badge bg-warning text-dark">Profil incomplet</span>
+    }
+</div>
+
+@if (!Model.IsProfileCompleted)
+{
+    <div class="alert alert-info">
+        <strong>Action requise :</strong><br />
+        Veuillez compléter votre profil pour publier une annonce.
+        <br /><br />
+        <a asp-page="/Dashboard/Profile" class="btn btn-primary">
+            Compléter mon profil
+        </a>
+    </div>
+}
+else
+{
+    <a asp-page="/Properties/Create" class="btn btn-primary">
+        Nouvelle propriété
+    </a>
+}

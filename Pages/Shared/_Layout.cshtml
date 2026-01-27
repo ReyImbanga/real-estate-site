@@ -27,12 +27,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                         <li>
-                            @if ((User.Identity?.IsAuthenticated == true) && !User.HasClaim("OwnerProfile", "true"))
+                            @if (User.Identity?.IsAuthenticated == true)
                             {
-                                <a asp-page="/Owners/Create" class="nav-link">
-                                    Devenir propriétaire
+                                <a asp-page="/Properties/Create" class="nav-link">
+                                    Nouvelle propriété
                                 </a>
                             }
+                        </li>
+                        <li>
+                            <a asp-page="/Properties/Search" class="nav-link">
+                                Rechercher
+                            </a>
+
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

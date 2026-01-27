@@ -6,17 +6,18 @@ namespace RealEstateWeb.Data
     {
         public int Id { get; set; }
 
-        [Required, MaxLength(100)]
-        public string FirstName { get; set; } = null!;
+        [MaxLength(100)]
+        public string? FirstName { get; set; }
 
-        [Required, MaxLength(100)]
-        public string LastName { get; set; } = null!;
+        [MaxLength(100)]
+        public string? LastName { get; set; }
 
-        [Required, MaxLength(320)]
-        public string EmailAddress { get; set; } = null!;
+        /*[Required, MaxLength(320)]
+        public string EmailAddress { get; set; } = null!;*/
 
-        [Required, MaxLength(30)]
-        public string PhoneNumber { get; set; } = null!;
+        //[Required, MaxLength(30)]
+        //public string PhoneNumber { get; set; } = null!;
+        public DateOnly? DateOfBirth { get; set; }
 
         // FK -> AspNetUsers
         [Required]
