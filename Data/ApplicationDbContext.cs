@@ -25,6 +25,20 @@ namespace RealEstateWeb.Data
         public DbSet<Media> Medias => Set<Media>();
         public DbSet<MediaType> MediaTypes => Set<MediaType>();
 
+        //Deuxieme vague
+
+        public DbSet<Ownership> Ownerships => Set<Ownership>();
+        public DbSet<RoleType> RoleTypes => Set<RoleType>();
+        public DbSet<Inspection> Inspections => Set<Inspection>();
+        public DbSet<ClientInspection> ClientInspections => Set<ClientInspection>();
+        public DbSet<Offer> Offers => Set<Offer>();
+        public DbSet<OfferStatus> OfferStatuses => Set<OfferStatus>();
+        public DbSet<Contract> Contracts => Set<Contract>();
+        public DbSet<ContractStatus> ContractStatuses => Set<ContractStatus>();
+
+
+        //-----deuxieme vague
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -125,6 +139,17 @@ namespace RealEstateWeb.Data
                 entity.HasIndex(h => h.StartDate);
             });
 
+            base.OnModelCreating(builder);
+
+            builder.Entity<Ownership>()
+                .HasKey(o => new { o.PropertyId, o.OwnerProfileId });
+
+            builder.Entity<ClientInspection>()
+                .HasKey(ci => new { ci.ClientProfileId, ci.InspectionId });
+
+            builder.Entity<Offer>()
+                .HasQueryFilter(o => o.DeletedAt == null);
+
 
 
             builder.Entity<PropertyType>().HasData(
@@ -149,6 +174,29 @@ namespace RealEstateWeb.Data
                 new MediaType { Id = 3, Description = "mp4" }
             );
 
+            builder.Entity<RoleType>().HasData(
+                new RoleType { Id = 1, Description = "Propriétaire principal" },
+                new RoleType { Id = 2, Description = "Co-propriétaire" },
+                new RoleType { Id = 3, Description = "Agent immobilier" },
+                new RoleType { Id = 4, Description = "Gestionnaire" }
+            );
+
+            builder.Entity<OfferStatus>().HasData(
+                new OfferStatus { Id = 1, Code = "PENDING", Description = "En attente" },
+                new OfferStatus { Id = 2, Code = "ACCEPTED", Description = "Acceptée" },
+                new OfferStatus { Id = 3, Code = "REJECTED", Description = "Refusée" },
+                new OfferStatus { Id = 4, Code = "CANCELLED", Description = "Annulée" }
+            );
+
+            builder.Entity<ContractStatus>().HasData(
+                new ContractStatus { Id = 1, Code = "DRAFT", Description = "Brouillon" },
+                new ContractStatus { Id = 2, Code = "SIGNED", Description = "Signé" },
+                new ContractStatus { Id = 3, Code = "ACTIVE", Description = "Actif" },
+                new ContractStatus { Id = 4, Code = "COMPLETED", Description = "Terminé" },
+                new ContractStatus { Id = 5, Code = "CANCELLED", Description = "Annulé" }
+
+
+            );
 
         }
     }

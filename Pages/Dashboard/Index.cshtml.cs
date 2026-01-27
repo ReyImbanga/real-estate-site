@@ -1,3 +1,4 @@
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,7 @@ using RealEstateWeb.Data;
 
 namespace RealEstateWeb.Pages.Dashboard
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

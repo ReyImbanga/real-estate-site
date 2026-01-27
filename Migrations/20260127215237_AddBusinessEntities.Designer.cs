@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RealEstateWeb.Data;
@@ -11,9 +12,11 @@ using RealEstateWeb.Data;
 namespace RealEstateWeb.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260127215237_AddBusinessEntities")]
+    partial class AddBusinessEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,38 +373,6 @@ namespace RealEstateWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContractStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "DRAFT",
-                            Description = "Brouillon"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "SIGNED",
-                            Description = "Signé"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "ACTIVE",
-                            Description = "Actif"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "COMPLETED",
-                            Description = "Terminé"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Code = "CANCELLED",
-                            Description = "Annulé"
-                        });
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Feature", b =>
@@ -711,32 +682,6 @@ namespace RealEstateWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OfferStatuses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "PENDING",
-                            Description = "En attente"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "ACCEPTED",
-                            Description = "Acceptée"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "REJECTED",
-                            Description = "Refusée"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "CANCELLED",
-                            Description = "Annulée"
-                        });
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Ownership", b =>
@@ -887,28 +832,6 @@ namespace RealEstateWeb.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RoleTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Propriétaire principal"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Co-propriétaire"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Agent immobilier"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Gestionnaire"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
