@@ -4,7 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Annonces immobilières</h2>
+<hr />
+
+@if (!Model.Listings.Any())
+{
+    <p>Aucune annonce disponible.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var l in Model.Listings)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5>@l.Property.AddressLine</h5>
+
+                        <p>
+                            <strong>Type :</strong> @l.Property.PropertyType.Description <br />
+                            <strong>Annonce :</strong> @l.ListingType.Description <br />
+                            <strong>Prix :</strong> @l.Price
+                        </p>
+
+                        <!-- ✅ SEULE ACTION PUBLIQUE -->
+                        <a asp-page="/Properties/Details"
+                           asp-route-id="@l.Id"
+                           class="btn btn-primary btn-sm">
+                            Détails
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Owners\" />
     <Folder Include="wwwroot\uploads\properties\" />
   </ItemGroup>
 

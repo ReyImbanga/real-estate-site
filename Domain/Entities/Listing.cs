@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RealEstateWeb.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace RealEstateWeb.Domain.Entities
 {
@@ -32,5 +33,6 @@ namespace RealEstateWeb.Domain.Entities
         // Navigation future
         public ICollection<ListingPriceHistory> PriceHistories { get; set; }
             = new List<ListingPriceHistory>();
+
     }
 }

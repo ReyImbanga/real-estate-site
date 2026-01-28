@@ -100,6 +100,7 @@ namespace RealEstateWeb.Data
                 entity.HasIndex(l => l.CreatedDate);
             });
 
+
             builder.Entity<PropertyFeature>(entity =>
             {
                 entity.HasKey(pf => new { pf.PropertyId, pf.FeatureId });

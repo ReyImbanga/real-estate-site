@@ -250,7 +250,7 @@ namespace RealEstateWeb.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("ClientProfiles");
+                    b.ToTable("ClientProfiles", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Data.OwnerProfile", b =>
@@ -283,7 +283,7 @@ namespace RealEstateWeb.Migrations
                     b.HasIndex("ApplicationUserId")
                         .IsUnique();
 
-                    b.ToTable("OwnerProfiles");
+                    b.ToTable("OwnerProfiles", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.ClientInspection", b =>
@@ -298,7 +298,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("InspectionId");
 
-                    b.ToTable("ClientInspections");
+                    b.ToTable("ClientInspections", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Contract", b =>
@@ -348,7 +348,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("ResponsibleOwnerId");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contracts", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.ContractStatus", b =>
@@ -369,7 +369,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContractStatuses");
+                    b.ToTable("ContractStatuses", (string)null);
 
                     b.HasData(
                         new
@@ -419,7 +419,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Features");
+                    b.ToTable("Features", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Inspection", b =>
@@ -451,7 +451,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("ResponsibleOwnerId");
 
-                    b.ToTable("Inspections");
+                    b.ToTable("Inspections", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Listing", b =>
@@ -492,7 +492,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("Listings");
+                    b.ToTable("Listings", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.ListingPriceHistory", b =>
@@ -521,7 +521,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("StartDate");
 
-                    b.ToTable("ListingPriceHistories");
+                    b.ToTable("ListingPriceHistories", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.ListingStatus", b =>
@@ -539,7 +539,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ListingStatuses");
+                    b.ToTable("ListingStatuses", (string)null);
 
                     b.HasData(
                         new
@@ -574,7 +574,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ListingTypes");
+                    b.ToTable("ListingTypes", (string)null);
 
                     b.HasData(
                         new
@@ -617,7 +617,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("Medias");
+                    b.ToTable("Medias", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.MediaType", b =>
@@ -635,7 +635,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MediaTypes");
+                    b.ToTable("MediaTypes", (string)null);
 
                     b.HasData(
                         new
@@ -689,7 +689,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("Offers");
+                    b.ToTable("Offers", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.OfferStatus", b =>
@@ -710,7 +710,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OfferStatuses");
+                    b.ToTable("OfferStatuses", (string)null);
 
                     b.HasData(
                         new
@@ -768,7 +768,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("RoleTypeId");
 
-                    b.ToTable("Ownerships");
+                    b.ToTable("Ownerships", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.Property", b =>
@@ -824,7 +824,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("Region");
 
-                    b.ToTable("Properties");
+                    b.ToTable("Properties", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.PropertyFeature", b =>
@@ -839,7 +839,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasIndex("FeatureId");
 
-                    b.ToTable("PropertyFeatures");
+                    b.ToTable("PropertyFeatures", (string)null);
                 });
 
             modelBuilder.Entity("RealEstateWeb.Domain.Entities.PropertyType", b =>
@@ -857,7 +857,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PropertyTypes");
+                    b.ToTable("PropertyTypes", (string)null);
 
                     b.HasData(
                         new
@@ -886,7 +886,7 @@ namespace RealEstateWeb.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleTypes");
+                    b.ToTable("RoleTypes", (string)null);
 
                     b.HasData(
                         new

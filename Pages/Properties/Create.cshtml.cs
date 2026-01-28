@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -99,9 +99,10 @@ namespace RealEstateWeb.Pages.Properties
                 _context.OwnerProfiles.Add(ownerProfile);
                 await _context.SaveChangesAsync();
             }
-
-
             //Cr?ation automatique du OwnerProfile
+
+            
+
 
             await using var tx = await _context.Database.BeginTransactionAsync();
 
@@ -123,6 +124,26 @@ namespace RealEstateWeb.Pages.Properties
                 _context.Properties.Add(property);
                 await _context.SaveChangesAsync();
 
+                var ownerRoleId = await _context.RoleTypes
+                .Where(r => r.Description == "Propriétaire principal")
+                .Select(r => r.Id)
+                .FirstAsync();
+
+                var ownership = new Ownership
+                {
+                    PropertyId = property.Id,
+                    OwnerProfileId = ownerProfile.Id,
+                    RoleTypeId = ownerRoleId,
+                    SharePercent = 100,
+                    IsPrimary = true,
+                    StartDate = DateOnly.FromDateTime(DateTime.Today)
+                };
+
+                _context.Ownerships.Add(ownership);
+                await _context.SaveChangesAsync();
+
+
+
                 var listing = new Listing
                 {
                     PropertyId = property.Id,
@@ -137,6 +158,7 @@ namespace RealEstateWeb.Pages.Properties
                 await _context.SaveChangesAsync();
 
                 
+
 
 
                 // Historique initial

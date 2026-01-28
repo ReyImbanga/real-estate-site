@@ -2,3 +2,96 @@
 @model RealEstateWeb.Pages.Dashboard.OwnerModel
 @{
 }
+
+<h2>Dashboard Propriétaire</h2>
+<hr />
+
+<h4>Mes biens</h4>
+
+@if (!Model.Properties.Any())
+{
+    <p>Aucun bien enregistré.</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Type</th>
+                <th>Annonces</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Properties)
+            {
+                <tr>
+                    <td>@p.AddressLine</td>
+                    <td>@p.City</td>
+                    <td>@p.PropertyType.Description</td>
+                    <td>@p.Listings.Count</td>
+                    <td>
+                        <a asp-page="/Properties/Details" asp-route-id="@p.Id"
+                           class="btn btn-sm btn-primary">
+                            Détails
+                        </a>
+                        @if (User.Identity?.IsAuthenticated == true && User.HasClaim("OwnerProfile", "true"))
+                        {
+                            <a asp-page="/Properties/Edit" asp-route-id="@p.Id"
+                               class="btn btn-sm btn-warning">
+                                Modifier
+                            </a>
+
+                            <a asp-page="/Properties/Delete" asp-route-id="@p.Id"
+                               class="btn btn-sm btn-danger">
+                                Supprimer
+                            </a>
+
+                        }
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+
+<h4>Offres reçues</h4>
+
+@if (!Model.Offers.Any())
+{
+    <p>Aucune offre reçue.</p>
+}
+else
+{
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Bien</th>
+                <th>Client</th>
+                <th>Montant</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model.Offers)
+            {
+                <tr>
+                    <td>@o.Property.AddressLine</td>
+                    <td>@o.ClientProfile.FirstName @o.ClientProfile.LastName</td>
+                    <td>@o.OfferAmount</td>
+                    <td>
+                        <span class="badge bg-secondary">
+                            @o.OfferStatus.Description
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
